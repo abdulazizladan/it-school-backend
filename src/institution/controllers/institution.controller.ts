@@ -32,6 +32,12 @@ export class InstitutionController {
     @Get('faculties')
     @ApiOperation({summary: 'Get all faculties'})
     getFaculties() {
+        return this.institutionService.getFaculties()
+    }
+
+    @Get('faculty/:code/departments')
+    @ApiOperation({summary: 'Get all departments in a department'})
+    getDepartmentsByFaculty() {
 
     }
 }

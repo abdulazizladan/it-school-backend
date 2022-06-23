@@ -1,6 +1,6 @@
 import { RegisterUserDTO } from "src/auth/dtos/auth.dto";
 import { Repository } from "typeorm";
-import { User } from "../entities/user.entity";
+import { User } from "../entitiess/user.entity";
 
 
 export class UserRepository extends Repository<User>{
