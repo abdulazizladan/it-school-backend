@@ -1,17 +1,29 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
+import { InjectRepository } from '@nestjs/typeorm';
+import { from, Observable } from 'rxjs';
+import { createBookDTO } from 'src/library/dto/book.dto';
+import { Repository } from 'typeorm';
 import { Book } from '../../entities/book.entity';
 
 @Injectable()
 export class BookService {
-    getAllBooks() {
 
+    constructor(@InjectRepository(Book) private bookRepository: Repository<Book>) {
+
+    }
+    getAllBooks(): Observable<Book[]> {
+        const books = this.bookRepository.find();
+        return from(books);
     }
 
     getBookByID(id: number) {
-
+        const book = this.bookRepository.findOne({where: {id}});
+        if(book) {
+            return book;
+        }else throw new NotFoundException();
     }
 
-    createBook() {
+    createBook(book: createBookDTO) {
 
     }
 

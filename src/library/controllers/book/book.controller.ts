@@ -14,19 +14,19 @@ export class BookController {
     @Get()
     @ApiOperation({summary: 'Retrieve a list of all books'})
     getAllBooks() {
-
+        return this.bookService.getAllBooks()
     }
 
     @Get(':id')
     @ApiOperation({summary: 'Retrieve a book by ID'})
     getBookByID(@Param('id', ParseIntPipe)id: number) {
-
+        return this.bookService.getBookByID(id)
     }
 
     @Post()
     @ApiOperation({summary: 'Upload book details'})
     createBook( @Body()createBookDTO: createBookDTO) {
-
+        return this.bookService.createBook(createBookDTO)
     }
 
     @Patch(':id')
