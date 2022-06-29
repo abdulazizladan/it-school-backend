@@ -13,7 +13,10 @@ export class BookService {
     }
     getAllBooks(): Observable<Book[]> {
         const books = this.bookRepository.find();
-        return from(books);
+        if(books) {
+            return from(books);
+         } else throw new NotFoundException
+        
     }
 
     getBookByID(id: number) {
@@ -23,15 +26,19 @@ export class BookService {
         }else throw new NotFoundException();
     }
 
-    createBook(book: createBookDTO) {
-
+    async createBook(book: createBookDTO) {
+        const newBook = await this.bookRepository.save(book);
+        return newBook;
     }
 
     updateBook(id: number) {
 
     }
 
-    removeBook(id:number) {
-
+    async removeBook(id:number) {
+        const book = await this.bookRepository.findOne({where: {id}})
+        if(book) {
+            this.bookRepository.remove(book);
+        } else throw new NotFoundException()
     }
 }

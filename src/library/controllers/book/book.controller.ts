@@ -38,6 +38,6 @@ export class BookController {
     @Delete(':id')
     @ApiOperation({summary: 'Remove book by ID'})
     removeBook(@Param('id', ParseIntPipe)id: number) {
-
+        this.bookService.removeBook(id)
     }
 }
